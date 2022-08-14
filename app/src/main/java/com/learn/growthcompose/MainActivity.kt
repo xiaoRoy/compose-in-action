@@ -2,10 +2,13 @@ package com.learn.growthcompose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
+import com.learn.growthcompose.turtorial.Message
 import com.learn.growthcompose.ui.theme.GrowthComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,9 +28,20 @@ class MainActivity : ComponentActivity() {
     private fun setComposeView() {
         val composeView = ComposeView(this)
         composeView.setContent {
-            Text(text = "Hello World!")
+//            Text(text = "Hello World!")
+            GreetingCard(message = Message("Android", "Adopt compose in your App!"))
         }
+
+
         setContentView(composeView)
+    }
+}
+
+@Composable
+fun GreetingCard(message: Message, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(text = message.author)
+        Text(text = message.body)
     }
 }
 
@@ -39,7 +53,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    GrowthComposeTheme {
-        Greeting("Android")
-    }
+    GreetingCard(Message(author = "Smith", "How are you?"))
 }
+
+
